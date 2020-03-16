@@ -1,0 +1,32 @@
+FROM		ubuntu:18.04
+
+# environment vars
+ENV MINERGATE_DOWNLOAD_URI="https://download.minergate.com/xfast-ubuntu-cli"
+ENV USERNAME 
+ENV CURRENCY xmr
+ENV CORES 4
+
+# install tools and dependencies 
+RUN \
+ apt-get update && \
+ apt-get install -y \
+ ca-certificates \
+ wget \
+ curl \
+ ocl-icd-libopencl1 \
+ nvidia-cuda-dev
+
+# install xfast
+ RUN curl -o \
+	    /tmp/minergate-cli-release.deb -L \
+	    "$MINERGATE_INSTALL" && \
+    dpkg -i /tmp/minergate-cli-release.deb && \
+
+# cleanup installation
+    apt-get -y autoremove && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    rm -rf /var/tmp/*
+
+    ENTRYPOINT ["minergate-cli"]
