@@ -1,10 +1,6 @@
 FROM		ubuntu:18.04
 
-# environment vars
 ENV MINERGATE_DOWNLOAD_URI="https://download.minergate.com/xfast-ubuntu-cli"
-ENV USERNAME 
-ENV CURRENCY xmr
-ENV CORES 4
 
 # install tools and dependencies 
 RUN \
@@ -19,7 +15,7 @@ RUN \
 # install xfast
  RUN curl -o \
 	    /tmp/minergate-cli-release.deb -L \
-	    "$MINERGATE_INSTALL" && \
+	    "$MINERGATE_DOWNLOAD_URI" && \
     dpkg -i /tmp/minergate-cli-release.deb && \
 
 # cleanup installation
