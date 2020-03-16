@@ -25,4 +25,4 @@ RUN \
     rm -rf /tmp/* && \
     rm -rf /var/tmp/*
 
-    ENTRYPOINT ["minergate-cli"]
+    ENTRYPOINT ["xfast-cli"]
